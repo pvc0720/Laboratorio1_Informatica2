@@ -228,7 +228,7 @@ int main() {
         }
 
         case 7: {
-            cout << "Problema 8";
+
 
             int N;
             cout << "Ingrese un numero entero N: ";
