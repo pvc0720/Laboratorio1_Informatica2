@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
 
+bool EsPalindromo(int num);
+bool esPrimo(int num);
+
 int main() {
     while(true){
     int opcion;
@@ -18,9 +21,10 @@ int main() {
     cout << "9. Numero primo" << endl;
     cout << "10. MCM" << endl;
     cout << "11. Maximo factor primo" << endl;
-    cout << "12. Suma de primos" << endl;
+    cout << "12. Espiral" << endl;
     cout << "13. Palindromo" << endl;
-    cout << "14. Espiral" << endl;
+    cout << "14. Numeros triangulares" << endl;
+    cout << "15. Suma de numeros primos" << endl;
     cout << "0. Salir" << endl;
     cout << "Ingrese el numero del ejercicio: ";
 
@@ -31,7 +35,7 @@ int main() {
     case 1:{
         cout << "Bienvenido al programa de calculo de billetes y monedas" << endl;
 
-            int cantidad;
+        int cantidad;
         cout << "Ingrese la cantidad de dinero: ";
         cin >> cantidad;
 
@@ -63,6 +67,7 @@ int main() {
 
         break;
     case 2: {
+        //Validar fecha
         cout << "Has validar fecha" << endl;
         int mes, dia;
         cout << "Ingrese un mes: ";
@@ -88,6 +93,7 @@ int main() {
         break;
     }
     case 3: {
+        //Hora y duración
         int hora, duracion;
 
         // Leer hora y duración
@@ -131,6 +137,7 @@ int main() {
 
         break;
     case 4: {
+        //Patrón de asteriscos
         cout << "Has seleccionado dibujar patron de asteriscos" << endl;
         int tamano;
 
@@ -174,6 +181,7 @@ int main() {
     }
 
     case 5: {
+        //Valor de Euler
         cout << "Has seleccionado Valor de Euler (aproximado)" << endl;
         int elementos;
         double e = 0.0;
@@ -198,6 +206,7 @@ int main() {
     }
 
     case 6: {
+        //Fibonacci
         cout << "Has seleccionado Fibonacci" << endl;
         int n;
         cout << "Ingrese un número n: ";
@@ -228,6 +237,7 @@ int main() {
     }
 
     case 7: {
+        //Multiplos de 3 números
         cout << "Has seleccionado multiplos de 3 numeros" << endl;
         int a;
         int b;
@@ -274,6 +284,7 @@ int main() {
     }
 
     case 8: {
+        //Suma elevados a sí mismos
 
 
         int N;
@@ -301,6 +312,7 @@ int main() {
         break;
     }
     case 9 : {
+        //Número primo
         int n;
 
         // Leer el número n
@@ -340,8 +352,9 @@ int main() {
         break;
     }
     case 10 : {
+        //MCM
         int numero;
-        cout << "Ingrese un número: ";
+        cout << "Ingrese un numero: ";
         cin >> numero;
 
         int minimo_comun_multiplo = 1;
@@ -359,6 +372,7 @@ int main() {
     }
 
     case 11 :{
+        //Maximo factor primo
 
         int numero;
         cout << "Ingrese un numero: ";
@@ -388,130 +402,135 @@ int main() {
     }
 
     case 12 : {
-        int numero;
-        cout << "Ingrese un numero: ";
-        cin >> numero;
-
-        int sumaPrimos = 0;
-
-        for (int i = 2; i < numero; i++) {
-                bool esPrimo = true;
-
-                for (int j = 2; j * j <= i; j++) {
-                if (i % j == 0) {
-                        esPrimo = false;
-                        break;
-                }
-                }
-
-                if (esPrimo) {
-                sumaPrimos += i;
-                }
-        }
-
-        cout << "El resultado de la suma es: " << sumaPrimos << endl;
-        break;
-    }
-
-    case 13 : {
-        int factor1, factor2;
-
-        cout << "Ingrese el primer factor de tres dígitos: ";
-        cin >> factor1;
-
-        cout << "Ingrese el segundo factor de tres dígitos: ";
-        cin >> factor2;
-
-        int palindromo_mas_grande = 0;
-
-        for (int i = factor1; i >= 100; i--) {
-                for (int j = factor2; j >= i; j--) {
-                int producto = i * j;
-
-                if (producto <= palindromo_mas_grande) {
-                        break;
-                }
-
-                int num = producto;
-                int original = num;
-                int invertido = 0;
-
-                while (num > 0) {
-                        invertido = invertido * 10 + num % 10;
-                        num /= 10;
-                }
-
-                if (original == invertido && original > palindromo_mas_grande) {
-                        palindromo_mas_grande = original;
-                        factor1 = i;
-                        factor2 = j;
-                }
-                }
-        }
-
-        cout << factor1 << " * " << factor2 << " = " << palindromo_mas_grande << endl;
-        break;
-    }
-
-    case 14 : {
+        //Matriz
         int n;
-        cout << "Ingrese un número impar: ";
-                cin >> n;
+        cout << "Ingrese un numero impar: ";
+        cin >> n;
 
-        int suma = 1; // Inicializamos la suma con el número 1, que siempre estará en la diagonal
-        int numero = 1;
-        int incremento = 2;
-
-        for (int i = 0; i < n / 2; i++) {
-                for (int j = 0; j < 4; j++) {
-                numero += incremento;
-                suma += numero;
-                }
-                incremento += 2;
-        }
-
-        cout << "En una espiral de " << n << "x" << n << ", la suma es: " << suma << endl;
-
-        // Imprimir la espiral
         int matriz[n][n];
-        int fila = n / 2;
-        int columna = n / 2;
-        int direccion = 0; // 0: derecha, 1: abajo, 2: izquierda, 3: arriba
+        int num = 1;
+        int i = 0, j = 0;
+        int limite_superior = n - 1;
+        int limite_inferior = 0;
 
-        for (int i = 1; i <= n * n; i++) {
-                matriz[fila][columna] = i;
-                if (direccion == 0) {
-                columna++;
-                if (matriz[fila + 1][columna] == 0) {
-                        direccion = 1;
+        while (num <= n*n) {
+                // Llenar de izquierda a derecha
+                for (int k = j; k <= limite_superior; k++) {
+                matriz[i][k] = num;
+                num++;
                 }
-                } else if (direccion == 1) {
-                fila++;
-                if (matriz[fila][columna - 1] == 0) {
-                        direccion = 2;
+                // Llenar de arriba hacia abajo
+                for (int k = i+1; k <= limite_superior; k++) {
+                matriz[k][limite_superior] = num;
+                num++;
                 }
-                } else if (direccion == 2) {
-                columna--;
-                if (matriz[fila - 1][columna] == 0) {
-                        direccion = 3;
+                // Llenar de derecha a izquierda
+                for (int k = limite_superior-1; k >= j; k--) {
+                matriz[limite_superior][k] = num;
+                num++;
                 }
-                } else if (direccion == 3) {
-                fila--;
-                if (matriz[fila][columna + 1] == 0) {
-                        direccion = 0;
+                // Llenar de abajo hacia arriba
+                for (int k = limite_superior-1; k > i; k--) {
+                matriz[k][j] = num;
+                num++;
                 }
-                }
+                // Actualizar los límites
+                limite_superior--;
+                limite_inferior++;
+                i++;
+                j++;
         }
 
-        cout << "Espiral:" << endl;
+        // Imprimir la matriz
         for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
                 cout << matriz[i][j] << " ";
                 }
                 cout << endl;
         }
-        break;
-    }
+
+        // Sumar los números de las diagonales
+        int suma = 0;
+        for (int i = 0; i < n; i++) {
+                suma += matriz[i][i]; // Diagonal principal
+                suma += matriz[i][n-1-i]; // Diagonal secundaria
+        }
+        suma -= matriz[n/2][n/2]; // Restar el número central si existe
+
+        cout << "La suma de los numeros en la diagonal es: " << suma << endl;
+
+          break;
+
+
+
+        }
+    case 13: {
+          //Palindromo
+          int factor_1 = 0,factor_2 = 0;
+
+         for(int i=999;i>=100;i--){
+
+                for(int j=999;j>=100;j--){
+
+                if(EsPalindromo(i*j) && factor_1 * factor_2 < i*j){
+                        factor_1 = i;
+                        factor_2 = j;
+                }
+                }
+          }
+         cout << factor_1<<"*"<<factor_2<<"="<<factor_1*factor_2<< endl;
+
+
+          break;
+
+        }
+    case 14:{
+          int k = 0;
+          cout <<"Ingrese un numero: "<<endl;
+          cin >> k;
+          int contador = 0;
+
+          for(int i=1;;i++){
+                int f = i*(i+1)/2;
+                contador = 1;
+                for(int j=2;j<=f;j++){
+                if (f%j==0){
+                        contador++;
+                }
+
+                }
+                if(contador>k){
+                cout<<"El numero es " << f << " que tiene " << contador << " divisores" << endl;
+                break;
+                }
+          }
+
+
+          break;
+        }
+    case 15:{
+          //Suma de numeros primos
+          int numero;
+          cout << "Ingrese un numero: ";
+                  cin >> numero;
+
+          int sumaPrimos = 0;
+
+          for (int i = 2; i < numero; i++) {
+                if (esPrimo(i)) {
+                sumaPrimos += i;
+                }
+          }
+
+          cout << "El resultado de la suma es: " << sumaPrimos << "." << endl;
+
+
+
+          break;
+        }
+
+
+
 
     case 0: {
         cout << "Saliendo del programa." << endl;
@@ -523,3 +542,47 @@ int main() {
 }
     return 0;
 }
+
+bool EsPalindromo(int num){
+    int* digitos = new int[4]{};
+    int tamano = 4;
+
+    //Este for se encarga de aumentar el tamaño de digitos sí es necesario
+    for(int i=0;num>0;i++){
+        if(tamano == i){
+            int* aux = new int[i + 1];
+            for(int j = 0; j <= i; j++){
+                aux[j] = digitos[j];
+            }
+            delete[] digitos;
+            digitos = aux;
+            tamano = i+1;
+        }
+
+
+        digitos[i] = num % 10;
+        num /=10;
+    }
+    if(digitos == nullptr){
+        return false;
+    }
+    for (int i=0,j=tamano+1;i<=tamano+1;i++,j--){
+        if (digitos[i] != digitos[j]){
+            return false;
+        }
+    }
+    return true;
+
+}
+bool esPrimo(int num) {
+    if (num <= 1) {
+        return false;
+    }
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
